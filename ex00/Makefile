@@ -1,7 +1,7 @@
-NAME = conversion
-CLASS = Conversion
+NAME = whatever
+CLASS = whatever
 HEADER = $(patsubst %,%.hpp,$(CLASS))
-FUNCTIONS = main $(CLASS)
+FUNCTIONS = main
 
 CC = clang++
 CFLAGS = -Wall -Wextra -Werror
