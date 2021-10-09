@@ -1,6 +1,6 @@
 NAME = whatever
-CLASS = whatever
-HEADER = $(patsubst %,%.hpp,$(CLASS))
+CLASS =
+HEADER = iter.hpp
 FUNCTIONS = main
 
 CC = clang++

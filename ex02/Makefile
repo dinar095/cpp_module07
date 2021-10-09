@@ -1,6 +1,6 @@
-NAME = whatever
-CLASS = whatever
-HEADER = $(patsubst %,%.hpp,$(CLASS))
+NAME = array
+CLASS =
+HEADER = Array.hpp
 FUNCTIONS = main
 
 CC = clang++

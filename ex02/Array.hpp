@@ -1,44 +1,65 @@
 #ifndef CPP_MODULE07_ARRAY_HPP
 #define CPP_MODULE07_ARRAY_HPP
 
+template <class T>
 
 class Array
 {
 private:
-	int m_lenght;
-	int *m_data;
+	unsigned int len;
+	T *arr;
 public:
-	Array() : m_lenght(0), m_data(NULL) {}
+	Array() : len(0), arr(NULL) {}
 
-	Array(int lenght) : m_lenght(lenght)
+	Array(unsigned int len) : len(len)
 	{
-		if (lenght > 0)
-			m_data = new int[lenght];
+		if (len > 0)
+			arr = new T[len];
 		else
-			m_data = NULL;
+			arr = NULL;
 	}
 
 	~Array()
 	{
-		delete[] m_data;
+		delete[] arr;
 	}
 
-	void erase()
+class ErrExcept : public std::exception
+		{
+			const char* what() const throw() { return "Overflow index"; }
+		};
+	T &operator[](unsigned int index)
 	{
-		delete[] m_data;
-		m_data = NULL;
-		m_lenght = 0;
+		if (index < 0 || index >= len)
+			throw Array<T>::ErrExcept();
+		return arr[index];
 	}
 
-	int& operator[](int index)
+	T const &operator[](unsigned int index) const
 	{
-		return m_data[index];
+		return (operator[](index));
 	}
 
-	int getLenght()	{return m_lenght; }
+	Array<T>& operator=(Array<T> const &src)
+	{
+		if (this->len > 0)
+			delete[] this->arr;
+		if (src.len)
+		{
+			arr = new T[src.len]();
+			for (unsigned int i = 0; i < src.len; i++)
+				arr[i] = src.arr[i];
+			len = src.len;
+		}
+		len = src.len;
+		return *this;
+	}
 
-
-
-
+	Array(Array<T> const &src) : len(0), arr(NULL)
+	{
+		*this = src;
+	}
 };
+
+
 #endif //CPP_MODULE07_ARRAY_HPP
